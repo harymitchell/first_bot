@@ -1,0 +1,20 @@
+function getComments(id){
+    id = id.substring(1, id.length-1);
+    var url = 'https://gdata.youtube.com/feeds/api/videos/'+id+'/comments'
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.send();
+//    console.log(xhr.status);                                                               
+//    console.log(xhr.statusText);                                                           
+    xmlDoc = xhr.responseXML;
+    var commentGroup = (xmlDoc.childNodes['0']);
+    var comments = commentGroup.getElementsByTagName("entry");
+    var len = comments.length;                                                               
+    for(i=len-1;i>=0;i--){                                                                   
+        //var title = comments[i].getElementsByTagName("title")[0].nodeValue;                
+        var content = comments[i].getElementsByTagName("content")[0].textContent;
+        console.log("\n"+content)
+    }
+}
+
+getComments("'K944TAvJULM'");
